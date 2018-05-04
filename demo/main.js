@@ -1,10 +1,7 @@
-import Vue from 'vue'
-import Demo from './Demo.vue'
-import Icon from '../src/components/Icon.vue'
+import Demo from './Demo.san'
+import { register } from '../src/components/register'
 
-Vue.component('icon', Icon)
-
-Icon.register({
+register({
   baidu: {
     width: 23.868,
     height: 26,
@@ -12,7 +9,7 @@ Icon.register({
   }
 })
 
-Icon.register({
+register({
   webpack: {
     width: 1200,
     height: 1200,
@@ -29,7 +26,7 @@ Icon.register({
   }
 })
 
-Icon.register({
+register({
   vue: {
     width: 256,
     height: 221,
@@ -46,7 +43,7 @@ Icon.register({
   }
 })
 
-Icon.register({
+register({
   'html5-c': {
     width: 512,
     height: 512,
@@ -55,11 +52,5 @@ Icon.register({
 })
 
 /* eslint-disable no-new */
-new Vue({
-  name: 'app',
-  el: '#app',
-  components: {
-    demo: Demo
-  },
-  render: h => h(Demo)
-})
+const demo = new Demo()
+demo.attach(document.getElementById('app'))

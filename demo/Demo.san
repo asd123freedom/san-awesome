@@ -1,6 +1,6 @@
 <template>
   <main>
-    <figure id="logo" @mouseenter="toggle" @mouseleave="toggle" @click="change" :title="logo"><icon :name="logo" scale="4"/></figure>
+    <figure id="logo" on-mouseenter="toggle" on-mouseleave="toggle" on-click="change" title="{{logo}}"><icon name="{{logo}}" scale="4"/></figure>
     <h1><a href="https://github.com/Justineo/vue-awesome">Vue-Awesome</a></h1>
     <p class="desc">Font Awesome component for Vue.js, using inline SVG.</p>
 
@@ -46,7 +46,7 @@
     <p><small>You can register your own icons.</small></p>
     <p><icon name="baidu"/></p>
     <figure><pre><code>&lt;icon <span class="attr">name</span>=<span class="val">"baidu"</span>&gt;&lt;/icon&gt;</code></pre></figure>
-    
+
     <h2>Multi-color icons</h2>
     <p><small>Register icons in more advanced ways to unleash the full power of SVG.</small></p>
     <p><icon name="webpack"/> <icon name="vue"/> <icon name="html5-c"/></p>
@@ -230,32 +230,35 @@ footer a:hover {
 </style>
 
 <script>
-import Icon from '../src/components/Icon.vue'
+import Icon from '../src/components/Icon.san'
+import { get } from '../src/components/register'
 import '../src/icons'
-const keys = Object.keys(Icon.icons)
+const keys = Object.keys(get())
 
 function randomIcon () {
   return keys[Math.floor(Math.random() * keys.length)]
 }
 
 export default {
-  data () {
+  initData () {
     return {
       logo: randomIcon(),
+      list: [1, 2, 3, 4, 5,],
       running: true
     }
   },
-  methods: {
-    change () {
-      this.logo = randomIcon()
-    },
-    toggle: function () {
-      this.running = !this.running
-    }
+  components: {
+    icon: Icon
   },
-  mounted () {
+  change () {
+    this.data.set('logo', randomIcon())
+  },
+  toggle () {
+    this.data.set('running', !this.data.get('running'))
+  },
+  attached () {
     setInterval(() => {
-      if (this.running) {
+      if (this.data.get('running')) {
         this.change()
       }
     }, 200)
