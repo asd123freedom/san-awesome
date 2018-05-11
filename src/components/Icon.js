@@ -1,4 +1,3 @@
-import { DataTypes, Component } from 'san'
 import { get } from './register'
 
 export default {
@@ -35,33 +34,33 @@ export default {
       outerScale: 1
     }
   },
-  dataTypes: {
-    name (props, propName) {
-      const val = props[propName]
-      if (val == null) {
-        return true
-      }
-      if (val) {
-        if (!(get(val))) {
-          console.warn(`Invalid prop: prop "name" is referring to an unregistered icon "${val}".` +
-            `\nPlease make sure you have imported this icon before using it.`)
-          return false
-        }
-        return true
-      }
-      console.warn(`Invalid prop: prop "name" is required and it must be string.`)
-      return false
-    },
-    scale: DataTypes.oneOfType([
-      DataTypes.string,
-      DataTypes.number
-    ]),
-    spin: DataTypes.bool,
-    inverse: DataTypes.bool,
-    pulse: DataTypes.bool,
-    flip: DataTypes.oneOf(['horizontal', 'vertical']),
-    label: DataTypes.string
-  },
+  // dataTypes: {
+  //   name (props, propName) {
+  //     const val = props[propName]
+  //     if (val == null) {
+  //       return true
+  //     }
+  //     if (val) {
+  //       if (!(get(val))) {
+  //         console.warn(`Invalid prop: prop "name" is referring to an unregistered icon "${val}".` +
+  //           `\nPlease make sure you have imported this icon before using it.`)
+  //         return false
+  //       }
+  //       return true
+  //     }
+  //     console.warn(`Invalid prop: prop "name" is required and it must be string.`)
+  //     return false
+  //   },
+  //   scale: DataTypes.oneOfType([
+  //     DataTypes.string,
+  //     DataTypes.number
+  //   ]),
+  //   spin: DataTypes.bool,
+  //   inverse: DataTypes.bool,
+  //   pulse: DataTypes.bool,
+  //   flip: DataTypes.oneOf(['horizontal', 'vertical']),
+  //   label: DataTypes.string
+  // },
   computed: {
     normalizedScale () {
       let scale = this.data.get('scale')
@@ -161,7 +160,9 @@ export default {
     if (this.data.get('icon')) {
       return
     }
-    const childrenIcons = this.slot()[0].children.filter(child => isComponent(child))
+    const childrenIcons = this.slot()[0].children.filter(
+      child => isComponent(child)
+    )
     childrenIcons.forEach(child => {
       child.data.set('outerScale', this.data.get('normalizedScale'))
     })
@@ -185,5 +186,5 @@ function getId () {
   return `fa-${(cursor++).toString(16)}`
 }
 function isComponent (node) {
-  return node instanceof Component
+  return node.hasOwnProperty('data')
 }
