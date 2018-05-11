@@ -227,7 +227,7 @@ footer a:hover {
     font-size: 0.9em;
   }
 }
-@import url('../src/components/icon-animation.css')
+@import url('../src/components/icon-animation.css');
 </style>
 
 <script>
