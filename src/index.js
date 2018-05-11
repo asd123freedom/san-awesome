@@ -1,3 +1,4 @@
-import Icon from './components/Icon.san'
+import Icon from './components/Icon'
+import san from 'san'
 import './icons/index.js'
-export default Icon
+export default san.defineComponent(Icon)

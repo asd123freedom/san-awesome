@@ -1,69 +1,31 @@
-<template>
-  <svg version="1.1"
-    class="{{klass}}"
-    role="{{label ? 'img' : 'presentation'}}"
-    aria-label="{{label}}"
-    x="{{x}}"
-    y="{{y}}"
-    width="{{width}}"
-    height="{{height}}"
-    viewBox="{{box}}"
-    style="{{style}}">
-    <slot>
-      <path s-if="icon && icon.paths"
-        s-for="path in icon.paths"
-        d="{{path.d}}"
-        style="{{path.style}}"/>
-      <polygon s-if="icon && icon.polygons"
-        s-for="polygon in icon.polygons"
-        points="{{polygon.points}}"
-        style="{{polygon.style}}"/>
-      <g s-if="icon && icon.raw" s-html="icon.raw"/>
-    </slot>
-  </svg>
-</template>
-
-<style>
-.fa-icon {
-  display: inline-block;
-  fill: currentColor;
-}
-
-.fa-flip-horizontal {
-  transform: scale(-1, 1);
-}
-
-.fa-flip-vertical {
-  transform: scale(1, -1);
-}
-
-.fa-spin {
-  animation: fa-spin 1s 0s infinite linear;
-}
-
-.fa-inverse {
-  color: #fff;
-}
-
-.fa-pulse {
-  animation: fa-spin 1s infinite steps(8);
-}
-
-@keyframes fa-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-</style>
-
-<script>
 import { DataTypes, Component } from 'san'
 import { get } from './register'
 
 export default {
+  template: `
+    <svg version="1.1"
+      class="{{klass}}"
+      role="{{label ? 'img' : 'presentation'}}"
+      aria-label="{{label}}"
+      x="{{x}}"
+      y="{{y}}"
+      width="{{width}}"
+      height="{{height}}"
+      viewBox="{{box}}"
+      style="{{style}}">
+      <slot>
+        <path s-if="icon && icon.paths"
+          s-for="path in icon.paths"
+          d="{{path.d}}"
+          style="{{path.style}}"/>
+        <polygon s-if="icon && icon.polygons"
+          s-for="polygon in icon.polygons"
+          points="{{polygon.points}}"
+          style="{{polygon.style}}"/>
+        <g s-if="icon && icon.raw" s-html="icon.raw"/>
+      </slot>
+    </svg>
+  `,
   initData () {
     return {
       x: 0,
@@ -74,10 +36,10 @@ export default {
     }
   },
   dataTypes: {
-    name(props, propName) {
+    name (props, propName) {
       const val = props[propName]
       if (val == null) {
-        return true;
+        return true
       }
       if (val) {
         if (!(get(val))) {
@@ -92,7 +54,7 @@ export default {
     },
     scale: DataTypes.oneOfType([
       DataTypes.string,
-      DataTypes.number,
+      DataTypes.number
     ]),
     spin: DataTypes.bool,
     inverse: DataTypes.bool,
@@ -145,7 +107,7 @@ export default {
       return `0 0 ${this.data.get('width')} ${this.data.get('height')}`
     },
     ratio () {
-      const icon = this.data.get('icon');
+      const icon = this.data.get('icon')
       if (!icon) {
         return 1
       }
@@ -199,7 +161,7 @@ export default {
     if (this.data.get('icon')) {
       return
     }
-    const childrenIcons = this.slot()[0].children.filter(child => isComponent(child));
+    const childrenIcons = this.slot()[0].children.filter(child => isComponent(child))
     childrenIcons.forEach(child => {
       child.data.set('outerScale', this.data.get('normalizedScale'))
     })
@@ -225,4 +187,3 @@ function getId () {
 function isComponent (node) {
   return node instanceof Component
 }
-</script>
