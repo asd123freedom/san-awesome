@@ -1,10 +1,10 @@
 {
-  "name": "vue-awesome",
+  "name": "san-awesome",
   "version": "3.0.0",
-  "description": "Font Awesome component for Vue.js, using inline SVG.",
-  "main": "dist/vue-awesome.js",
+  "description": "Font Awesome component for San, using inline SVG.",
+  "main": "dist/san-awesome.js",
   "module": "index.js",
-  "repository": "Justineo/vue-awesome",
+  "repository": "LeuisKen/san-awesome",
   "scripts": {
     "dev": "node build/dev-server.js",
     "demo": "node build/build.js",
@@ -15,7 +15,7 @@
   },
   "keywords": [
     "Font Awesome",
-    "Vue.js"
+    "San"
   ],
   "author": "Justineo (justice360@gmail.com)",
   "license": "MIT",
@@ -67,10 +67,6 @@
     "shelljs": "^0.7.6",
     "style-loader": "^0.21.0",
     "url-loader": "^0.5.8",
-    "vue": "^2.5.3",
-    "vue-loader": "^13.5.0",
-    "vue-style-loader": "^2.0.5",
-    "vue-template-compiler": "^2.5.3",
     "webpack": "^2.3.3",
     "webpack-bundle-analyzer": "^2.2.1",
     "webpack-dev-middleware": "^1.10.0",
