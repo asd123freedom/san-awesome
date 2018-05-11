@@ -227,12 +227,12 @@ footer a:hover {
     font-size: 0.9em;
   }
 }
+@import url('../src/components/icon-animation.css')
 </style>
 
 <script>
 import Icon from '../src'
 import { get } from '../src/components/register'
-import '../src/components/icon-animation.css'
 const keys = Object.keys(get())
 
 function randomIcon () {
