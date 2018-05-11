@@ -1,8 +1,8 @@
 <template>
   <main>
     <figure id="logo" on-mouseenter="toggle" on-mouseleave="toggle" on-click="change" title="{{logo}}"><icon name="{{logo}}" scale="4"/></figure>
-    <h1><a href="https://github.com/Justineo/vue-awesome">Vue-Awesome</a></h1>
-    <p class="desc">Font Awesome component for Vue.js, using inline SVG.</p>
+    <h1><a href="https://github.com/LeuisKen/san-awesome">San-Awesome</a></h1>
+    <p class="desc">Font Awesome component for San, using inline SVG.</p>
 
     <h2>Basic</h2>
     <p><icon name="flag"/></p>

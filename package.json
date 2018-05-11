@@ -2,13 +2,13 @@
   "name": "san-awesome",
   "version": "3.0.0",
   "description": "Font Awesome component for San, using inline SVG.",
-  "main": "dist/san-awesome.js",
+  "main": "lib/index.js",
   "module": "index.js",
   "repository": "LeuisKen/san-awesome",
   "scripts": {
     "dev": "node build/dev-server.js",
     "demo": "node build/build.js",
-    "build": "cross-env NODE_ENV=production rollup -c",
+    "build": "cp -r ./src/ ./lib && babel ./lib -d ./lib",
     "icons": "node build/fa2json.js && node build/icons.js",
     "fa2json": "node build/fa2json.js",
     "pub": "sh ./publish.sh"
@@ -81,5 +81,8 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "dependencies": {
+    "babel-cli": "^6.26.0"
+  }
 }
