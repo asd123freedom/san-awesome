@@ -3,6 +3,10 @@
   "version": "3.0.0",
   "description": "Font Awesome component for San, using inline SVG.",
   "main": "lib/index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
   "module": "index.js",
   "repository": "LeuisKen/san-awesome",
   "scripts": {
