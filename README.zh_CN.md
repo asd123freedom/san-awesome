@@ -71,7 +71,7 @@ export default {
 
 ##### 引入源码版本
 
-如果你正在使用 webpack 来构建项目并且希望使用未经转译的组件（引入 `vue-awesome/components/Icon` 而非直接引入 `vue-awesome`）来减小打包尺寸（是推荐用法），那么你可能需要需要按下述的方式修改 `webpack.conf.js`：
+如果你正在使用 webpack 来构建项目并且希望使用未经转译的组件（引入 `san-awesome/components/Icon` 而非直接引入 `san-awesome`）来减小打包尺寸（是推荐用法），那么你可能需要需要按下述的方式修改 `webpack.conf.js`：
 
 ```diff
       {
@@ -88,10 +88,10 @@ export default {
 var san = require('san')
 
 // 引入 UMD 模块
-var Icon = require('vue-awesome')
+var Icon = require('san-awesome')
 
 // 或者在使用 vue-loader 时可以直接引入源码版本
-var Icon = require('vue-awesome/components/Icon')
+var Icon = require('san-awesome/components/Icon')
 
 // 注册组件后即可使用
 Vue.component('icon', Icon)

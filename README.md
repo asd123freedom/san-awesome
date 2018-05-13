@@ -1,33 +1,21 @@
-# Vue-Awesome
+# San-Awesome
 
-> Awesome SVG icon component for Vue.js, with built-in Font Awesome icons.
+This repository is a fork of `vue-awesome`.
+
+> Awesome SVG icon component for San, with built-in Font Awesome icons.
 
 > [🇨🇳 中文版](./README.zh_CN.md)
 
-Vue-Awesome an SVG icon component for [Vue.js](https://vuejs.org/), with built-in icons courtesy of [Font Awesome](https://fontawesome.com/).
+San-Awesome an SVG icon component for [San](https://baidu.github.io/san/), with built-in icons courtesy of [Font Awesome](https://fontawesome.com/).
 
-Check out the demo [here](https://justineo.github.io/vue-awesome/demo/).
+Check out the demo [here](https://leuisken.github.io/san-awesome/).
 
 ## Installation
 
 ### npm (Recommended)
 
 ```bash
-$ npm install vue-awesome
-```
-
-### bower
-
-```bash
-$ bower install vue-awesome
-```
-
-### Manual
-
-Just download `dist/vue-awesome.js` and include it in your HTML file:
-
-```html
-<script src="path/to/vue-awesome/dist/vue-awesome.js"></script>
+$ npm install san-awesome
 ```
 
 ## Usage
@@ -48,38 +36,35 @@ Just download `dist/vue-awesome.js` and include it in your HTML file:
 </icon>
 ```
 
-Font Awesome 5 has separated all icons into several packs. Vue-Awesome is built upon its all free icons, which includes all free icons from 3 icon packs: `regular`, `solid` and `brands`. Since the `solid` pack has the most number of icons, we organize all Vue-Awesome icons as follows:
+Font Awesome 5 has separated all icons into several packs. San-Awesome is built upon its all free icons, which includes all free icons from 3 icon packs: `regular`, `solid` and `brands`. Since the `solid` pack has the most number of icons, we organize all Vue-Awesome icons as follows:
 
-* All icons from `solid` pack are located in `vue-awesome/icons` directory and have unprefixed `name` prop values.
+* All icons from `solid` pack are located in `san-awesome/icons` directory and have unprefixed `name` prop values.
 
-* Icons from `regular` and `brands` are located in `vue-awesome/icons/regular` and `vue-awesome/icons/brands`, which have prefixed `name` prop values like `regular/flag` or `brands/reddit`.
+* Icons from `regular` and `brands` are located in `san-awesome/icons/regular` and `san-awesome/icons/brands`, which have prefixed `name` prop values like `regular/flag` or `brands/reddit`.
 
 You can find all available `name` values from [Font Awesome's website](https://fontawesome.com/icons) like `beer`, `file` and `camera`.
 
-### ES Modules with NPM & vue-loader (Recommended)
+### ES Modules with NPM (Recommended)
 
 ```js
-import Vue from 'vue'
+import san from 'san'
 
 /* Pick one way between the 2 following ways */
 
 // only import the icons you use to reduce bundle size
-import 'vue-awesome/icons/flag'
+import 'san-awesome/icons/flag'
 
 // or import all icons if you don't care about bundle size
-import 'vue-awesome/icons'
+import 'san-awesome/icons'
 
 /* Register component with one of 2 methods */
 
-import Icon from 'vue-awesome/components/Icon'
+import Icon from 'san-awesome/components/Icon'
 
-// globally (in your main .js file)
-Vue.component('icon', Icon)
-
-// or locally (in your component file)
+// locally (in your component file)
 export default {
   components: {
-    Icon
+    icon: Icon
   }
 }
 ```
@@ -88,35 +73,21 @@ export default {
 
 ##### Importing the souce version
 
-If you are using `vue-cli` to create your project and you want to use the untranspiled component (import `vue-awesome/components/Icon` rather than import `vue-awesome` directly, to optimize bundle size, which is recommended), the `webpack` template is not including files in `node_modules` for `babel-loader`. To fix this problem, try change `build/webpack.base.conf.js` like this:
+If you are using `webpack` to create your project and you want to use the untranspiled component (import `vue-awesome/components/Icon` rather than import `vue-awesome` directly, to optimize bundle size, which is recommended), you may change `webpack.conf.js` like this:
 
 ```diff
       {
         test: /\.js$/,
         loader: 'babel-loader',
 -       include: [resolve('src'), resolve('test')]
-+       include: [resolve('src'), resolve('test'), resolve('node_modules/vue-awesome')]
++       include: [resolve('src'), resolve('test'), resolve('node_modules/san-awesome')]
       }
 ```
-
-If you are using bare webpack config, just do similar modifications make it work.
-
-##### Unit Testing with Jest
-
-Make sure to whitelist `vue-awesome` from the `transformIgnorePattern`. Add following configuation in `test/unit/jest.conf.js`:
-
-```diff
-+ transformIgnorePatterns: [
-+   '/node_modules(?![\\\\/]vue-awesome[\\\\/])/'
-+ ],
-```
-
-*Don't import all icons if you don't want to make unit testing slow because this will transform all icons from ES module and thus slow down the test process.*
 
 ### CommonJS with NPM without ES Next support
 
 ```js
-var Vue = require('vue')
+var san = require('san')
 
 // requiring the UMD module
 var Icon = require('vue-awesome')
@@ -127,63 +98,11 @@ var Icon = require('vue-awesome/components/Icon')
 // register component to use
 ```
 
-### AMD
-
-```js
-require.config({
-  paths: {
-    'vue-awesome': 'path/to/vue-awesome'
-  }
-})
-
-require(['vue-awesome'], function (Icon) {
-  // register component to use
-  Vue.component('icon', Icon)
-})
-```
-
-### Global variable
-
-The component class is exposed as `window.VueAwesome`.
-
-```js
-// register component to use
-Vue.component('icon', VueAwesome)
-```
-
-### Using with Nuxt.js
-
-When using Vue-Awesome on the server side with Nuxt.js, it may prompt `Unexpected token import` because Nuxt.js has configured an `external` option by default, which prevent files under `node_modules` from being bundled into the server bundle with only a few exceptions. We need to add `vue-awesome` into the `whitelist` as follows:
-
-```js
-// Don't forget to
-// npm i --save-dev webpack-node-externals
-const nodeExternals = require('webpack-node-externals')
-
-module.exports = {
-  // ...
-  build: {
-    extend (config, { isServer }) {
-      // ...
-      if (isServer) {
-        config.externals = [
-          nodeExternals({
-            // default value for `whitelist` is
-            // [/es6-promise|\.(?!(?:js|json)$).{1,5}$/i]
-            whitelist: [/es6-promise|\.(?!(?:js|json)$).{1,5}$/i, /^vue-awesome/]
-          })
-        ]
-      }
-    }
-  }
-}
-```
-
 ### Misc
 
-If you are using `vue-awesome/components/Icon` (instead of the whole bundled version), Vue-Awesome won't import a single icon by default. Do not forget to import icons you want to use.
+If you are using `san-awesome/components/Icon` (instead of the whole bundled version), San-Awesome won't import a single icon by default. Do not forget to import icons you want to use.
 
-If these caveats don't help and there are no proper workarounds in [earlier issues](https://github.com/Justineo/vue-awesome/issues?utf8=%E2%9C%93&q=is%3Aissue), please feel free to [file a new one](https://github.com/Justineo/vue-awesome/issues/new).
+If these caveats don't help and there are no proper workarounds in [earlier issues](https://github.com/LeuisKen/san-awesome/issues?utf8=%E2%9C%93&q=is%3Aissue), please feel free to [file a new one](https://github.com/LeuisKen/san-awesome/issues/new).
 
 ## Styling
 
@@ -226,9 +145,9 @@ Don't touch files in `src/icons` but update `assets/svg/*` instead and run `npm 
 You can register custom icons like this:
 
 ```js
-import Icon from 'vue-awesome/components/Icon'
+import { register } from 'san-awesome/components/register'
 
-Icon.register({
+register({
   baidu: {
     width: 23.868,
     height: 26,
@@ -244,9 +163,9 @@ If your SVG file has more than one path or polygon, and/or you want to have a pr
 #### Paths
 
 ```js
-import Icon from 'vue-awesome/components/Icon'
+import { register } from 'san-awesome/components/register'
 
-Icon.register({
+register({
   webpack: {
     width: 1200,
     height: 1200,
@@ -267,9 +186,9 @@ Icon.register({
 #### Polygons
 
 ```js
-import Icon from 'vue-awesome/components/Icon'
+import { register } from 'san-awesome/components/register'
 
-Icon.register({
+register({
   vue: {
     width: 256,
     height: 221,
@@ -292,9 +211,9 @@ Icon.register({
 **You need to include [innersvg-polyfill](https://www.npmjs.com/package/svg-innerhtml) before you use this feature.**
 
 ```js
-import Icon from 'vue-awesome/components/Icon'
+import { register } from 'san-awesome/components/register'
 
-Icon.register({
+register({
   'html5-c': {
     width: 512,
     height: 512,
