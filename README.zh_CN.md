@@ -1,31 +1,19 @@
-# Vue-Awesome
+# San-Awesome
 
-> 基于 Vue.js 的强大 SVG 图标组件。已内置 Font Awesome 图标。
+本仓库是 `Vue-Awesome` 的一个 fork，主要是将它从 Vue 搬到了 San，并且由于一些原因，对组件的实用方式做了一些修改。
 
-Vue-Awesome 是基于 [Vue.js](https://vuejs.org/) 的 SVG 图标组件，内置图标来自 [Font Awesome](https://fontawesome.com/)。
+> 基于 San.js 的强大 SVG 图标组件。已内置 Font Awesome 图标。
 
-查看[此处](https://justineo.github.io/vue-awesome/demo/)的 demo 一睹为快。
+San-Awesome 是基于 [San](https://baidu.github.io/san/) 的 SVG 图标组件，内置图标来自 [Font Awesome](https://fontawesome.com/)。
+
+查看[此处](https://leuisken.github.io/san-awesome/)的 demo 一睹为快。
 
 ## 安装
 
 ### npm（推荐方式）
 
 ```bash
-$ npm install vue-awesome
-```
-
-### bower
-
-```bash
-$ bower install vue-awesome
-```
-
-### 手动安装
-
-直接下载 `dist/vue-awesome.js` 并在 HTML 文件中引入：
-
-```html
-<script src="path/to/vue-awesome/dist/vue-awesome.js"></script>
+$ npm install san-awesome
 ```
 
 ## 使用方法
@@ -46,38 +34,35 @@ $ bower install vue-awesome
 </icon>
 ```
 
-Font Awesome 5 开始把所有图标分成了多个包。Vue-Awesome 的图标都来自其中的免费图标，而免费图标分别来自 3 个不同的图标包：`regular`、`solid` 和 `brands`。因为 `solid` 下的免费图标数量最多，所以我们选择按如下方式来组织图标：
+Font Awesome 5 开始把所有图标分成了多个包。San-Awesome 的图标都来自其中的免费图标，而免费图标分别来自 3 个不同的图标包：`regular`、`solid` 和 `brands`。因为 `solid` 下的免费图标数量最多，所以我们选择按如下方式来组织图标：
 
-* 所有来自 `solid` 包的图标位于 `vue-awesome/icons` 目录下，且 `name` prop 的值不带前缀。
+* 所有来自 `solid` 包的图标位于 `san-awesome/icons` 目录下，且 `name` prop 的值不带前缀。
 
-* 来自 `regular` 和 `brands` 的图标位于 `vue-awesome/icons/regular` 和 `vue-awesome/icons/brands` 目录下，且 `name` prop 的值需要添加前缀，例如 `regular/flag` 或者 `brands/reddit`。
+* 来自 `regular` 和 `brands` 的图标位于 `san-awesome/icons/regular` 和 `san-awesome/icons/brands` 目录下，且 `name` prop 的值需要添加前缀，例如 `regular/flag` 或者 `brands/reddit`。
 
 请访问 [Font Awesome 官网](https://fontawesome.com/)以查询可以使用的 `name` 值，如 `beer`、`file`、`camera` 等。
 
-### 用 npm 与 vue-loader 基于 ES Module 引入（推荐用法）
+### 用 npm 基于 ES Module 引入（推荐用法）
 
 ```js
-import Vue from 'vue'
+import san from 'san'
 
 /* 在下面两种方式中任选一种 */
 
 // 仅引入用到的图标以减小打包体积
-import 'vue-awesome/icons/flag'
+import 'san-awesome/icons/flag'
 
 // 或者在不关心打包体积时一次引入全部图标
-import 'vue-awesome/icons'
+import 'san-awesome/icons'
 
 /* 任选一种注册组件的方式 */
 
-import Icon from 'vue-awesome/components/Icon'
+import Icon from 'san-awesome/components/Icon'
 
-// 全局注册（在 `main .js` 文件中）
-Vue.component('icon', Icon)
-
-// 或局部注册（在组件文件中）
+// 局部注册（在组件文件中）
 export default {
   components: {
-    Icon
+    icon: Icon
   }
 }
 ```
@@ -86,35 +71,21 @@ export default {
 
 ##### 引入源码版本
 
-如果你正在使用 vue-cli 来创建项目并且希望使用未经转译的组件（引入 `vue-awesome/components/Icon` 而非直接引入 `vue-awesome`）来减小打包尺寸（是推荐用法），那么 Vue 的 `webpack` 模板可能会把 `node_modules` 中的文件排除在 `babel-loader` 转译范围以外。要解决此问题，需要按下述的方式修改 `build/webpack.base.conf.js`：
+如果你正在使用 webpack 来构建项目并且希望使用未经转译的组件（引入 `vue-awesome/components/Icon` 而非直接引入 `vue-awesome`）来减小打包尺寸（是推荐用法），那么你可能需要需要按下述的方式修改 `webpack.conf.js`：
 
 ```diff
       {
         test: /\.js$/,
         loader: 'babel-loader',
 -       include: [resolve('src'), resolve('test')]
-+       include: [resolve('src'), resolve('test'), resolve('node_modules/vue-awesome')]
++       include: [resolve('src'), resolve('test'), resolve('node_modules/san-awesome')]
       }
 ```
-
-如果你正直接配置使用 webpack，那么也请做类似的修改使其能够正常工作。
-
-##### 使用 Jest 进行单元测试
-
-请确保已将 `vue-awesome` 从 `transformIgnorePattern` 中排除。在 `test/unit/jest.conf.js` 中加入如下配置：
-
-```diff
-+ transformIgnorePatterns: [
-+   '/node_modules(?![\\\\/]vue-awesome[\\\\/])/'
-+ ],
-```
-
-*如果不想让单元测试变得很慢，那么请不要引入所有图标。因为每个图标都会从 ES module 格式进行转译，从而使整个测试过程变得非常缓慢。*
 
 ### 在没有 ES Next 支持环境下用 npm 以 CommonJS 方式引入
 
 ```js
-var Vue = require('vue')
+var san = require('san')
 
 // 引入 UMD 模块
 var Icon = require('vue-awesome')
@@ -126,63 +97,11 @@ var Icon = require('vue-awesome/components/Icon')
 Vue.component('icon', Icon)
 ```
 
-### AMD
-
-```js
-require.config({
-  paths: {
-    'vue-awesome': 'path/to/vue-awesome'
-  }
-})
-
-require(['vue-awesome'], function (Icon) {
-  // 注册组件后即可使用
-  Vue.component('icon', Icon)
-})
-```
-
-### 全局变量
-
-组件将通过 `window.VueAwesome` 变量暴露接口：
-
-```js
-// 注册组件后即可使用
-Vue.component('icon', VueAwesome)
-```
-
-### 在 Nuxt.js 中使用
-
-在 Nuxt.js 的服务端中使用 Vue-Awesome 时，可能会报 `Unexpected token import` 的错误。这是因为 Nuxt.js 默认配置了 `externals` 选项，会使得 `node_modules` 目录下的绝大多数文件被排除在服务端打包代码以外。需要按如下方式将 `vue-awesome` 加入 `whitelist` 选项：
-
-```js
-// 别忘了运行
-// npm i --save-dev webpack-node-externals
-const nodeExternals = require('webpack-node-externals')
-
-module.exports = {
-  // ...
-  build: {
-    extend (config, { isServer }) {
-      // ...
-      if (isServer) {
-        config.externals = [
-          nodeExternals({
-            // `whitelist` 选项的默认值是
-            // [/es6-promise|\.(?!(?:js|json)$).{1,5}$/i]
-            whitelist: [/es6-promise|\.(?!(?:js|json)$).{1,5}$/i, /^vue-awesome/]
-          })
-        ]
-      }
-    }
-  }
-}
-```
-
 ### 其它
 
-如果你正在使用 `vue-awesome/components/Icon`（而非整体打包的版本），Vue-Awesome 默认是不会引入任何图标的。别忘了自行引入你想使用的图标。
+如果你正在使用 `san-awesome/components/Icon`（而非整体打包的版本），San-Awesome 默认是不会引入任何图标的。别忘了自行引入你想使用的图标。
 
-如果这些信息仍然无法帮助你解决问题，且[之前的 issue](https://github.com/Justineo/vue-awesome/issues?utf8=%E2%9C%93&q=is%3Aissue) 中也没有合适的解决方案，请尽管[创建新 issue](https://github.com/Justineo/vue-awesome/issues/new)。
+如果这些信息仍然无法帮助你解决问题，且[之前的 issue](https://github.com/LeuisKen/san-awesome/issues?utf8=%E2%9C%93&q=is%3Aissue) 中也没有合适的解决方案，请尽管[创建新 issue](https://github.com/LeuisKen/san-awesome/issues/new)。
 
 ## 设定样式
 
@@ -225,9 +144,9 @@ $ npm run dev
 可以用如下方式注册自定义图标：
 
 ```js
-import Icon from 'vue-awesome/components/Icon'
+import { register } from 'san-awesome/components/register'
 
-Icon.register({
+register({
   baidu: {
     width: 23.868,
     height: 26,
@@ -243,9 +162,9 @@ Icon.register({
 #### 路径
 
 ```js
-import Icon from 'vue-awesome/components/Icon'
+import { register } from 'san-awesome/components/register'
 
-Icon.register({
+register({
   webpack: {
     width: 1200,
     height: 1200,
@@ -266,9 +185,9 @@ Icon.register({
 #### 多边形
 
 ```js
-import Icon from 'vue-awesome/components/Icon'
+import { register } from 'san-awesome/components/register'
 
-Icon.register({
+register({
   vue: {
     width: 256,
     height: 221,
@@ -291,9 +210,9 @@ Icon.register({
 **在使用此功能前，你需要引入 [innersvg-polyfill](https://www.npmjs.com/package/svg-innerhtml)。**
 
 ```js
-import Icon from 'vue-awesome/components/Icon'
+import { register } from 'san-awesome/components/register'
 
-Icon.register({
+register({
   'html5-c': {
     width: 512,
     height: 512,
