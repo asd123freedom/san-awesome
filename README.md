@@ -22,18 +22,18 @@ $ npm install san-awesome
 
 ```html
 <!-- basic -->
-<icon name="beer"></icon>
+<v-icon name="beer"/>
 
 <!-- with options -->
-<icon name="sync" scale="2" spin></icon>
-<icon name="comment" flip="horizontal"></icon>
-<icon name="code-branch" label="Forked Repository"></icon>
+<v-icon name="sync" scale="2" spin/>
+<v-icon name="comment" flip="horizontal"/>
+<v-icon name="code-branch" label="Forked Repository"/>
 
 <!-- stacked icons -->
-<icon label="No Photos">
-  <icon name="camera"></icon>
-  <icon name="ban" scale="2" class="alert"></icon>
-</icon>
+<v-icon label="No Photos">
+  <v-icon name="camera"/>
+  <v-icon name="ban" scale="2" class="alert"/>
+</v-icon>
 ```
 
 Font Awesome 5 has separated all icons into several packs. San-Awesome is built upon its all free icons, which includes all free icons from 3 icon packs: `regular`, `solid` and `brands`. Since the `solid` pack has the most number of icons, we organize all Vue-Awesome icons as follows:
