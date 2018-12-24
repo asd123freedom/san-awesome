@@ -1,3 +1,3 @@
-import Icon from '../${namespace}components/Icon.san'
+import Icon from '../${namespace}components/Icon'
 
 Icon.register(${icon})
