@@ -73,7 +73,7 @@ export default {
 
 ##### Importing the souce version
 
-If you are using `webpack` to create your project and you want to use the untranspiled component (import `vue-awesome/components/Icon` rather than import `vue-awesome` directly, to optimize bundle size, which is recommended), you may change `webpack.conf.js` like this:
+If you are using `webpack` to create your project and you want to use the untranspiled component (import `san-awesome/components/Icon` rather than import `san-awesome` directly, to optimize bundle size, which is recommended), you may change `webpack.conf.js` like this:
 
 ```diff
       {
@@ -90,10 +90,11 @@ If you are using `webpack` to create your project and you want to use the untran
 var san = require('san')
 
 // requiring the UMD module
-var Icon = require('vue-awesome')
+var Icon = require('san-awesome')
 
-// or with vue-loader you can require the src directly
-var Icon = require('vue-awesome/components/Icon')
+// or use build-in method of san
+var Icon = require('san-awesome/components/Icon')
+san.defineComponent(Icon);
 
 // register component to use
 ```
@@ -207,8 +208,6 @@ register({
 ```
 
 #### Raw SVG
-
-**You need to include [innersvg-polyfill](https://www.npmjs.com/package/svg-innerhtml) before you use this feature.**
 
 ```js
 import { register } from 'san-awesome/components/register'

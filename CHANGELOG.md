@@ -1,3 +1,16 @@
+3.4.0
+* Update to `@fortawesome/fontawesome-free@5.7.2`.
+
+3.3.1
+* Fix npm package.
+
+3.3.0
+* Fix unexpected focus for IE.
+* Updated to `@fortawesome/fontawesome-free@5.6.3`.
+
+3.2.0
+* Updated `fa2svg` to `1.2.0`.
+
 3.1.3
 * Supported not rendering anything when explicitly set `name` to `null`.
 

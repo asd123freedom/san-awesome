@@ -90,11 +90,9 @@ var san = require('san')
 // 引入 UMD 模块
 var Icon = require('san-awesome')
 
-// 或者在使用 vue-loader 时可以直接引入源码版本
+// 使用san框架的内建方法定义组件
 var Icon = require('san-awesome/components/Icon')
-
-// 注册组件后即可使用
-Vue.component('icon', Icon)
+san.defineComponent(Icon);
 ```
 
 ### 其它
@@ -206,8 +204,6 @@ register({
 ```
 
 #### 原始 SVG
-
-**在使用此功能前，你需要引入 [innersvg-polyfill](https://www.npmjs.com/package/svg-innerhtml)。**
 
 ```js
 import { register } from 'san-awesome/components/register'
