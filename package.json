@@ -13,8 +13,8 @@
     "dev": "node build/dev-server.js",
     "demo": "node build/build.js",
     "build": "cp -r ./src/ ./lib && babel ./lib -d ./lib",
-    "icons": "node build/fa2json.js && node build/icons.js",
-    "fa2json": "node build/fa2json.js",
+    "icons": "node -r esm build/fa2json.js && node -r esm build/icons.js",
+    "fa2json": "node -r esm build/fa2json.js",
     "pub": "sh ./publish.sh"
   },
   "keywords": [

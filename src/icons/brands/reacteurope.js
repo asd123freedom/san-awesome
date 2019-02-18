@@ -1,6 +1,5 @@
 import Icon from '../../components/Icon'
 
-
 Icon.register({
   'brands/reacteurope': {
     width: 570,
